@@ -1,4 +1,5 @@
 var app = angular.module('myfrontapp', []);
+
 app.controller('myMainCtrl', function($scope, $http) {
 
   $scope.HitApi=function(url,method){
@@ -9,20 +10,22 @@ app.controller('myMainCtrl', function($scope, $http) {
           // this callback will be called asynchronously
           // when the response is available
           $scope.status=response.status;
-          $scope.config=response.config;
-          $scope.apiresponse=JSON.stringify(response.data);
+          $scope.config=JSON.stringify(response.config,undefined,4);
+          $scope.apiresponse=JSON.stringify(response.data,undefined,4);
           mytest($scope);
         }, function errorCallback(response) {
           // called asynchronously if an error occurs
           // or server returns response with an error status.
           $scope.status=response.status;
-          $scope.config=response.config;
-          $scope.apiresponse=JSON.stringify(response.data);
+          $scope.config=JSON.stringify(response.config,undefined,4);
+          $scope.apiresponse=JSON.stringify(response.data,undefined,4);
           mytest($scope);
         });
   }
 
 });
+
+
 
 
 var mytest=function($scope){
@@ -32,7 +35,6 @@ var mytest=function($scope){
   //   $scope.status="Test case :validate status code is Failed with status :" + $scope.status;
   // }
   var textfind=$scope.apiresponse.search("name");
-  console.log(textfind);
   if (textfind>-1){
       $scope.status="Test case :validate mentioned text present is Passed";
   }else{
