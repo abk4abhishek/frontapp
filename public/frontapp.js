@@ -3,6 +3,7 @@ var app = angular.module('myfrontapp', []);
 app.controller('myMainCtrl', function($scope, $http) {
 
   $scope.HitApi=function(url,method){
+        console.log(method);
         $http({
           method: method,
           url:url
@@ -29,15 +30,16 @@ app.controller('myMainCtrl', function($scope, $http) {
 
 
 var mytest=function($scope){
-  // if($scope.status==200){
-  //   $scope.status="Test case :validate status code is Passed with status :" + $scope.status;
-  // }else{
-  //   $scope.status="Test case :validate status code is Failed with status :" + $scope.status;
-  // }
+  $scope.apitest="";
+  if($scope.status==200){
+    $scope.apitest=$scope.apitest + "\nTest case :validate status code is Passed with status :" + $scope.status;
+  }else{
+    $scope.apitest=$scope.apitest + "\nTest case :validate status code is Failed with status :" + $scope.status;
+  }
   var textfind=$scope.apiresponse.search("name");
   if (textfind>-1){
-      $scope.status="Test case :validate mentioned text present is Passed";
+      $scope.apitest=$scope.apitest + "\nTest case :validate mentioned text present is Passed";
   }else{
-      $scope.status="Test case :validate mentioned text present is Failed";
+      $scope.apitest=$scope.apitest + "\nTest case :validate mentioned text present is Failed";
   }
 }
